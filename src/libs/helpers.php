@@ -41,4 +41,5 @@ function session_flash(...$keys):array {
 			$data[] = [];
 		}
 	}
+	return $data;
 }

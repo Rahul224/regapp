@@ -2,7 +2,9 @@
 
 $errors = [];
 $inputs = [];
-
+if (is_user_logged_in()) {
+    redirect_to('index.php');
+}
 if (is_post_request()) {
 
     $fields = [

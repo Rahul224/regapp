@@ -13,6 +13,17 @@ function error_class(array $errors, string $field):string
 	return isset($errors[$field]) ? 'error' : '';
 }
 
+
+function is_post_request(): bool
+{
+	return strtoupper($_SERVER['REQUEST_METHOD']) === 'POST';
+}
+
+function is_get_request():bool 
+{
+	return strtoupper($_SERVER['REQUEST_METHOD']) == 'GET';
+}
+
 function redirect_to(string $url):void {
 	header('Location:'.$url);
 	exit;
@@ -26,9 +37,10 @@ function redirect_with(string $url, array $items):void {
 	redirect_to($url);
 }
 
-/*function redirect_with_message(string $url, string $message, string $type=FLASH_SUCCESS){
-
-}*/
+function redirect_with_message(string $url, string $message, string $type=FLASH_SUCCESS){
+	flash("flash_".uniqid(), $message, $type);
+	redirect_to($url);
+}
 
 
 function session_flash(...$keys):array {
